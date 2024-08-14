@@ -8,7 +8,9 @@
 		},
 		{
 			"name": "Comment",
-			"scope": "comment",
+			"scope": [
+				"comment",
+			],
 			"settings": {
 				"foreground": "#a2d2a8",
 				"fontStyle": "italic"
@@ -16,7 +18,10 @@
 		},
 		{
 			"name": "String",
-			"scope": "string",
+			"scope": [
+				"string",
+				"entity.name.import",
+			],
 			"settings": {
 				"foreground": "#ffa904"
 			}
@@ -50,6 +55,7 @@
 			"name": "Variable",
 			"scope": [
 				"variable",
+				"keyword.operator.star.sql",
 				// "variable.other",
 				// "variable.other.assignment",
 				// "variable.other.property",
@@ -63,7 +69,8 @@
 			"scope": [
 				"keyword",
 				"storage",
-				"keyword.control",
+				// "keyword.control",
+				// "keyword.other",
 				"variable.other.property",
 			],
 			"settings": {
@@ -74,7 +81,7 @@
 			"name": "Storage type",
 			"scope": [
 				// "entity.name.tag",
-				"support.function",
+				// "support.function",
 				"markup.underline.link.markdown",
 				"markup.underline.link.image.markdown",
 				"meta.image.inline.markdown",
@@ -96,7 +103,10 @@
 		},
 		{
 			"name": "Function name",
-			"scope": "entity.name.function",
+			"scope": [
+				"entity.name.function",
+				"support.function",
+			],
 			"settings": {
 				"fontStyle": "",
 				"foreground": "#b7d133"
@@ -201,12 +211,6 @@
 			"scope": "entity.name.filename.find-in-files",
 			"settings": {
 				"foreground": "#E6DB74"
-			}
-		},
-		{
-			"scope": "keyword.other",
-			"settings": {
-				"foreground": "#afafaf"
 			}
 		},
 		{
@@ -362,8 +366,9 @@
 		"scrollbar.shadow": "#9bcbeca3",
 		"activityBar.foreground": "#c26262",
 		"activityBar.background": "#000000",
-		"activityBar.inactiveForeground": "#ffd2d266",
-		"activityBarBadge.foreground": "#fffb00",
+		"activityBar.inactiveForeground": "#1d64b69b",
+		"activityBarBadge.foreground": "#9bcbec",
+		// "activityBarBadge.foreground": "#fffb00",
 		"activityBarBadge.background": "#1a3f58",
 		"activityBar.border": "#000000",
 		"activityBar.activeBackground": "#000000",

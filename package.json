@@ -1,14 +1,22 @@
 {
   "name": "frost-spark-theme",
-  "displayName": "frost-spark-theme",
-  "description": "",
-  "version": "0.0.1",
+  "displayName": "Frost Spark VSCode Theme",
+  "publisher": "pbarnum",
+  "description": "Icy-blue VSCode theme with a spark of color",
+  "version": "0.0.2",
+  "scripts": {
+    "deploy": "vsce publish --yarn"
+  },
   "engines": {
     "vscode": "^1.92.0"
   },
   "categories": [
     "Themes"
   ],
+  "galleryBanner": {
+    "color": "#07161b",
+    "theme": "dark"
+  },
   "contributes": {
     "themes": [
       {
@@ -17,5 +25,19 @@
         "path": "./themes/frost-spark-dark-color-theme.json"
       }
     ]
+  },
+  "icon": "assets/icon.png",
+  "pricing": "Free",
+  "license": "LICENSE",
+  "bugs": {
+    "url": "https://github.com/pbarnum/frost-spark-vscode-theme/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbarnum/frost-spark-vscode-theme.git"
+  },
+  "homepage": "https://github.com/pbarnum/frost-spark-vscode-theme/blob/main/README.md",
+  "devDependencies": {
+    "@vscode/vsce": "^2.31.1"
   }
 }

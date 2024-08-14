@@ -2,8 +2,12 @@
 
 All notable changes to the "frost-spark-theme" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [v0.0.2]
 
-## [Unreleased]
+- Adds extension icon
+- Better badge color
+- Updates colors for more languages
+
+## [v0.0.1]
 
 - Initial release
