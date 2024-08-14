@@ -5,7 +5,7 @@
   "description": "Icy-blue VSCode theme with a spark of color",
   "version": "0.0.2",
   "scripts": {
-    "deploy": "vsce publish --yarn",
+    "deploy": "vsce publish",
     "test": "echo tested!"
   },
   "engines": {
@@ -29,7 +29,7 @@
   },
   "icon": "assets/icon.png",
   "pricing": "Free",
-  "license": "LICENSE",
+  "license": "GPL-3.0-only",
   "bugs": {
     "url": "https://github.com/pbarnum/frost-spark-vscode-theme/issues"
   },
