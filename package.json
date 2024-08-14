@@ -5,7 +5,8 @@
   "description": "Icy-blue VSCode theme with a spark of color",
   "version": "0.0.2",
   "scripts": {
-    "deploy": "vsce publish --yarn"
+    "deploy": "vsce publish --yarn",
+    "test": "echo tested!"
   },
   "engines": {
     "vscode": "^1.92.0"
