@@ -4,6 +4,7 @@
   "publisher": "pbarnum",
   "description": "Icy-blue dark theme with a spark of color for VSCode and Cursor",
   "version": "0.0.2",
+  "type": "module",
   "keywords": [
     "theme",
     "dark theme",
@@ -13,7 +14,9 @@
     "blue"
   ],
   "scripts": {
-    "deploy": "vsce publish",
+    "build": "node src/index.js",
+    "watch": "node src/index.js --watch",
+    "deploy": "npm run build && vsce publish",
     "test": "echo tested!"
   },
   "engines": {
