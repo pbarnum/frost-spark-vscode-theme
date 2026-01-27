@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '24'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build theme
+      run: npm run build
+
+    - name: Verify theme files exist
+      run: |
+        if [ ! -f "themes/frost-spark-dark-color-theme.json" ]; then
+          echo "Error: Theme file was not generated"
+          exit 1
+        fi
+        echo "✓ Theme file generated successfully"
+
+    - name: Validate theme JSON
+      run: |
+        node -e "
+          const fs = require('fs');
+          const theme = JSON.parse(fs.readFileSync('themes/frost-spark-dark-color-theme.json', 'utf8'));
+          if (!theme.name || !theme.colors || !theme.tokenColors) {
+            console.error('Error: Theme file is missing required properties');
+            process.exit(1);
+          }
+          console.log('✓ Theme JSON is valid');
+          console.log('  - Name:', theme.name);
+          console.log('  - Colors:', Object.keys(theme.colors).length, 'defined');
+          console.log('  - Token colors:', theme.tokenColors.length, 'rules');
+        "
+
+    - name: Run tests
+      run: npm test
