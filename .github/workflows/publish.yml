@@ -1,3 +1,5 @@
+name: Publish Extension
+
 on:
   workflow_dispatch:
     inputs:
