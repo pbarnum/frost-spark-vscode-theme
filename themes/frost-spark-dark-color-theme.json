@@ -143,14 +143,14 @@
 			"name": "Library variable",
 			"scope": "support.other.variable",
 			"settings": {
-				"foreground": ""
+				// "foreground": ""
 			}
 		},
 		{
 			"name": "Invalid",
 			"scope": "invalid",
 			"settings": {
-				"background": "#00a8c6",
+				// "background": "#00a8c6",
 				"fontStyle": "",
 				"foreground": "#f8f8f0"
 			}
@@ -159,7 +159,7 @@
 			"name": "Invalid deprecated",
 			"scope": "invalid.deprecated",
 			"settings": {
-				"background": "#00a8c6",
+				// "background": "#00a8c6",
 				"foreground": "#f8f8f0"
 			}
 		},
@@ -239,7 +239,7 @@
 			"name": "Function argument",
 			"scope": "meta.property-name support.type.property-name",
 			"settings": {
-				"fontStyle": "normal"
+				// "fontStyle": "normal"
 			}
 		},
 		{
@@ -250,7 +250,7 @@
 			],
 			"settings": {
 				"foreground": "#62ff43",
-				"fontStyle": "normal"
+				// "fontStyle": "normal"
 			}
 		},
 		{
@@ -440,7 +440,7 @@
 		"editorCursor.foreground": "#9bcbec",
 		"editorCursor.background": "#000000",
 		"editor.selectionBackground": "#264f78",
-		"editor.inactiveSelectionBackground": "#3a3d41",
+		"editor.inactiveSelectionBackground": "#add6ff26",
 		"editorWhitespace.foreground": "#e3e4e229",
 		"editor.selectionHighlightBackground": "#add6ff26",
 		"editor.selectionHighlightBorder": "#495F77",
@@ -467,7 +467,7 @@
 		"editorBracketMatch.background": "#0064001a",
 		"editorBracketMatch.border": "#888888",
 		"editor.foldBackground": "#264f784d",
-		"editorOverviewRuler.background": "#25252500",
+		"editorOverviewRuler.background": "#07161b",
 		"editorOverviewRuler.border": "#7f7f7f4d",
 		"editorError.foreground": "#f48771",
 		"editorError.background": "#B73A3400",
@@ -569,12 +569,12 @@
 		"editorMarkerNavigationError.background": "#f48771",
 		"editorMarkerNavigationWarning.background": "#cca700",
 		"editorMarkerNavigationInfo.background": "#75beff",
-		"merge.currentHeaderBackground": "#367366",
-		"merge.currentContentBackground": "#27403B",
-		"merge.incomingHeaderBackground": "#395F8F",
-		"merge.incomingContentBackground": "#28384B",
-		"merge.commonHeaderBackground": "#383838",
-		"merge.commonContentBackground": "#282828",
+		"merge.currentHeaderBackground": "#36736658",
+		"merge.currentContentBackground": "#27403B58",
+		"merge.incomingHeaderBackground": "#395F8F58",
+		"merge.incomingContentBackground": "#28384B58",
+		"merge.commonHeaderBackground": "#38383858",
+		"merge.commonContentBackground": "#28282858",
 		"editorSuggestWidget.background": "#252526",
 		"editorSuggestWidget.border": "#454545",
 		"editorSuggestWidget.foreground": "#d4d4d4",
