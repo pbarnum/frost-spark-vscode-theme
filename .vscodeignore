@@ -2,3 +2,9 @@
 .vscode-test/**
 .gitignore
 vsc-extension-quickstart.md
+src/**
+CONTRIBUTING.md
+COLOR_UTILITIES_EXAMPLES.md
+COLOR_SYSTEM_IMPROVEMENTS.md
+ARCHITECTURE.md
+.github/**

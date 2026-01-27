@@ -1,27 +1,115 @@
 on:
-  push:
-    branches:
-      - main
-  release:
-    types:
-      - created
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Install Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: 18.x
+        node-version: '24'
+
     - name: Install dependencies
       run: npm install
+
     - name: Run tests
-      run: xvfb-run -a npm test
-    - name: Publish
-      if: success() && startsWith(github.ref, 'refs/tags/')
+      run: |
+        set -e
+        xvfb-run -a npm test
+
+    - name: Configure git
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Get last tag
+      id: last_tag
+      run: |
+        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+        echo "last_tag=$LAST_TAG" >> $GITHUB_OUTPUT
+
+    - name: Bump version
+      id: version
+      run: |
+        npm version ${{ inputs.version }} --no-git-tag-version
+        NEW_VERSION=$(node -p "require('./package.json').version")
+        echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+        echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
+
+    - name: Generate changelog
+      run: |
+        if [ -n "${{ steps.last_tag.outputs.last_tag }}" ]; then
+          COMMITS=$(git log ${{ steps.last_tag.outputs.last_tag }}..HEAD --pretty=format:"- %s" --no-merges)
+        else
+          COMMITS=$(git log --pretty=format:"- %s" --no-merges)
+        fi
+
+        DATE=$(date +%Y-%m-%d)
+
+        # Create temp file with new changelog entry
+        cat > /tmp/new_changelog.md << 'HEREDOC'
+        # Change Log
+
+        All notable changes to the "frost-spark-theme" extension will be documented in this file.
+
+        HEREDOC
+
+        echo "" >> /tmp/new_changelog.md
+        echo "## [v${{ steps.version.outputs.new_version }}] - $DATE" >> /tmp/new_changelog.md
+        echo "" >> /tmp/new_changelog.md
+        echo "$COMMITS" >> /tmp/new_changelog.md
+        echo "" >> /tmp/new_changelog.md
+
+        # Append old changelog (skip first 4 lines - header)
+        tail -n +5 CHANGELOG.md >> /tmp/new_changelog.md
+
+        # Replace original
+        mv /tmp/new_changelog.md CHANGELOG.md
+
+    - name: Publish to VS Code Marketplace
       run: npm run deploy
       env:
         VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+    - name: Commit version bump and changelog
+      run: |
+        git add package.json CHANGELOG.md
+        git commit -m "Bump version to ${{ steps.version.outputs.new_version }}"
+        git push
+
+    - name: Create and push tag
+      run: |
+        git tag ${{ steps.version.outputs.tag }}
+        git push origin ${{ steps.version.outputs.tag }}
+
+    - name: Create GitHub Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.version.outputs.tag }}
+        release_name: Release ${{ steps.version.outputs.new_version }}
+        body: |
+          Release version ${{ steps.version.outputs.new_version }}
+
+          See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+        draft: false
+        prerelease: false
